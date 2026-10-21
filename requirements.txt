@@ -1,5 +1,5 @@
 streamlit>=1.36
-streamlit-webrtc>=0.47
+streamlit-webrtc==0.78.1
 opencv-python-headless==4.10.0.84
 av>=12
 numpy>=1.24
