@@ -11,6 +11,7 @@ import av
 
 RTC_CONFIGURATION = RTCConfiguration({
     "iceServers": [
+        {"urls": ["stun:stun.cloudflare.com:3478"]},
         {"urls": ["stun:stun.l.google.com:19302"]}
     ]
 })
