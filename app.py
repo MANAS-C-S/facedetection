@@ -1,8 +1,13 @@
 import cv2
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, WebRtcMode
+from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, WebRtcMode, RTCConfiguration
 import av
 
+RTC_CONFIGURATION = RTCConfiguration({
+    "iceServers": [
+        {"urls": ["stun:stun.l.google.com:19302"]}
+    ]
+})
 st.set_page_config(
     page_title="Face Detection ML",
     page_icon="👁️",
@@ -89,6 +94,7 @@ with left:
         mode=WebRtcMode.SENDRECV,
         video_processor_factory=FaceProcessor,
         media_stream_constraints={"video": True, "audio": False},
+         rtc_configuration=RTC_CONFIGURATION,
         async_processing=True,
     )
     st.caption("Press START to begin and STOP to end the camera stream.")
