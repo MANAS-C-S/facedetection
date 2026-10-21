@@ -90,11 +90,16 @@ with left:
     st.subheader("Live camera")
     st.write("Allow camera access when your browser asks.")
     webrtc_ctx = webrtc_streamer(
-        key="face-detection",
+          key="face-detection",
         mode=WebRtcMode.SENDRECV,
         video_processor_factory=FaceProcessor,
         media_stream_constraints={"video": True, "audio": False},
-        async_processing=True,
+        rtc_configuration={
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]}
+            ]
+        },
+         async_processing=True,
     )
     st.caption("Press START to begin and STOP to end the camera stream.")
 
