@@ -85,18 +85,23 @@ with st.sidebar:
     st.divider()
     st.caption("Haar Cascade is lightweight and useful for learning. It may miss side profiles or faces in poor lighting.")
 
-left, right = st.columns([1.6, 1])
 with left:
     st.subheader("Live camera")
     st.write("Allow camera access when your browser asks.")
-      webrtc_ctx = webrtc_streamer(
+
+    webrtc_ctx = webrtc_streamer(
         key="face-detection",
         mode=WebRtcMode.SENDRECV,
         video_processor_factory=FaceProcessor,
         media_stream_constraints={"video": True, "audio": False},
-        rtc_configuration=RTC_CONFIGURATION,
+        rtc_configuration={
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]}
+            ]
+        },
         async_processing=True,
     )
+
     st.caption("Press START to begin and STOP to end the camera stream.")
 
 with right:
